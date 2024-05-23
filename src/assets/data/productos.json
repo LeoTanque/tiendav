@@ -1,0 +1,36 @@
+
+[
+    {
+        "_id": "1",
+        "nombre": "chaquetas",
+        "descripccion": "forradas",
+        "categoria": ["hombres", "mujeres"],
+        "imageUrl": [
+            "../../../assets/img/products/technology/1.jpg",
+            "../../../assets/img/products/technology/2.jpg",
+            "../../../assets/img/products/technology/3.jpg",
+            "../../../assets/img/products/technology/4.jpg"
+        ],
+        "precio_venta": 70000,
+        "precio_regular": 120000,
+        "fechacreacion": "2024-03-13",
+        "slug": "tipo-chaquetas"
+    },
+    {
+        "_id": "2",
+        "nombre": "Camisetas",
+        "descripccion": "mangacorta",
+        "categoria": ["hombres","mujeres"],
+        "imageUrl": [
+            "../../../assets/img/products/technology/5.jpg",
+            "../../../assets/img/products/technology/6.jpg",
+            "../../../assets/img/products/technology/7.jpg",
+            "../../../assets/img/products/technology/8.jpg"
+        ],
+        "precio_venta": 70000,
+        "precio_regular": 120000,
+        "fechacreacion": "2024-03-13",
+        "slug": "camisetas"
+    }
+
+]

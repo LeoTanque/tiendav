@@ -1,0 +1,5 @@
+<div class="deslizador">
+    <swiper-container class="swiper-container" navigation="true" pagination="false" speed="100" effect="coverflow" grab-cursor="true" centered-slides="true" slides-per-view="auto" coverflow-effect-rotate="0" coverflow-effect-stretch="0" coverflow-effect-depth="100" coverflow-effect-modifier="1" coverflow-effect-slide-shadows="true" loop="true" autoplay="true" :autoplay="{delay: 500}" #swiper>
+        <swiper-slide class="swiper-slide" *ngFor="let image of sliderImages"><img [src]="image"></swiper-slide>
+    </swiper-container> 
+</div>
