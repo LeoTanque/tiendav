@@ -5,12 +5,16 @@ import { SignupComponent } from './componentes/auth/signup/signup.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { ProductoComponent } from './componentes/producto/producto.component';
 import { CarritoComponent } from './componentes/carrito/carrito.component';
+import { ProductListComponent } from './componentes/product-list/product-list.component';
 
 const routes: Routes = [
+  {path: '', redirectTo:'', pathMatch:'full'},
   {path: '', component: HomeComponent},
   {path: 'signin', component: SigninComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'carrito', component: CarritoComponent},
+  {path: 'producto', component: ProductoComponent},
+  {path: 'list', component: ProductListComponent},
   {path: 'producto/:id', component: ProductoComponent},
 ];
 

@@ -1,0 +1,8 @@
+.textos{
+display: flex;
+gap: 15px;
+}
+
+.textos p {
+    cursor: pointer;
+}

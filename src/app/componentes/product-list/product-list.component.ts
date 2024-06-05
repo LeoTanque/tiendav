@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
-})
+}) 
 export class ProductListComponent implements OnInit, OnDestroy{
 
   producto: Producto[]=[];
