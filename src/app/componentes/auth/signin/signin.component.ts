@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { merge } from 'rxjs';
 import { AuthService, CredencialI } from '../../../servicios/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signin',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
 export class SigninComponent {
 titulo: string='Shammy Sport es una tienda de ropa informal para toda la familia';
 parrafo: string='Ingresa con tu usuario y contraseña y conoce tus promociones';
-user: string='Usuario';
+user: string='Email';
 pass: string='Contraseña'
 parrafo2: string='Tus datos estan siendo protegidos'
 
@@ -31,7 +32,7 @@ constructor(private formBuilder: FormBuilder, private auth: AuthService, private
 
 ngOnInit(): void {}
 
-onLogin() {
+onLogin1() {
   if (this.loginForm.valid) {
     const { email, password } = this.loginForm.value;
     const credencial: CredencialI = { email, password };
@@ -40,7 +41,7 @@ onLogin() {
       .then((userCredential: any) => {
         console.log('Usuario inició sesión exitosamente:', userCredential);
         // Redirigir al usuario después de iniciar sesión
-        this.route.navigate(['/producto']);
+        this.route.navigate(['']);
       })
       .catch((error: any) => {
         console.error('Error al iniciar sesión:', error);
@@ -51,6 +52,86 @@ onLogin() {
   }
 }
 
+onLogin() {
+  if (this.loginForm.valid) {
+    const { email, password } = this.loginForm.value;
+    const credencial: CredencialI = { email, password };
+
+    this.auth.logInWithEmailAndPassword(credencial)
+      .then((userCredential: any) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Inicio de sesión exitoso',
+          text: 'Usuario inició sesión exitosamente',
+        });
+         console.log('Usuario inició sesión exitosamente:', userCredential);
+        this.route.navigate(['']);
+      })
+      .catch((error: any) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al iniciar sesión: ' + error.message,
+        });
+      });
+  } else {
+    this.showValidationErrors();
+  }
+}
+
+showValidationErrors() {
+  if (this.email?.invalid) {
+    this.showEmailErrors();
+  } else if (this.password?.invalid) {
+    this.showPasswordErrors();
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Formulario inválido',
+      text: 'Por favor, corrige los errores en el formulario',
+    });
+  }
+}
+
+showEmailErrors() {
+  if (this.email?.errors?.['required']) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error en el inicio de sesión',
+      text: 'El correo es obligatorio',
+    });
+  } else if (this.email?.errors?.['email']) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error en el inicio de sesión',
+      text: 'Correo no válido',
+    });
+  }
+}
+
+showPasswordErrors() {
+  if (this.password?.errors?.['required']) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error en el inicio de sesión',
+      text: 'La contraseña es obligatoria',
+    });
+  } else if (this.password?.errors?.['minlength']) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error en el inicio de sesión',
+      text: 'La contraseña debe tener al menos 6 caracteres',
+    });
+  }
+}
+
+get email() {
+  return this.loginForm.get('email');
+}
+
+get password() {
+  return this.loginForm.get('password');
+}
 
 }
 

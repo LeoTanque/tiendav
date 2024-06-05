@@ -1,6 +1,6 @@
 export interface Producto {
     // Identificador único del producto
-    _id: string;
+    _id?: string;
 
     // Nombre del producto
     nombre: string;

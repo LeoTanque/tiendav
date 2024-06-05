@@ -10,6 +10,6 @@ export class ProductoItemComponent implements OnInit {
   @Input() producto: Producto | undefined;
 
   ngOnInit(): void {
-      console.log(this.producto);
+      //console.log(this.producto);
   }
 }

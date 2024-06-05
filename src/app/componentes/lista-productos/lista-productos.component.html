@@ -1,0 +1,9 @@
+<div *ngFor="let producto of productos">
+    <h3>{{ producto.nombre }}</h3>
+    <p>{{ producto.descripcion }}</p>
+    <p>{{ producto.precio | currency }}</p>
+    <img [src]="producto.imageUrl" alt="{{ producto.nombre }}">
+    <button (click)="updateProducto(producto)">Actualizar</button>
+    <button (click)="deleteProducto(producto.id)">Eliminar</button>
+  </div>
+  <button (click)="addProducto()">Añadir Producto</button>

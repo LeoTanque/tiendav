@@ -5,7 +5,7 @@
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
           <h2 class="text-sm title-font text-gray-500 tracking-widest">NUESTROS PRODUCTOS DE LA MEJOR CALIDAD</h2>
           <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{producto?.nombre | uppercase}}</h1>
-          <div class="flex mb-4">
+          <div class="flex mb-4"> 
             <span class="flex items-center">
               <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
@@ -75,7 +75,7 @@
               <span class="text-red-500 ml-2 ">{{producto ? ((producto.precio_regular-producto.precio_venta)/(producto.precio_regular)|percent) : null}}</span>  
               </p> </span>
             <button class="flex ml-auto text-white bg-red-600 border-0 py-2 px-6 focus:outline-none hover:bg-red-400 rounded">Comprar Ahora</button>
-            <button class="flex text-white bg-red-600 border-0 py-2 px-6 ml-2 focus:outline-none hover:bg-red-400 rounded" (click)="(producto)">Agregar Al Carrito</button>
+            <button class="flex text-white bg-red-600 border-0 py-2 px-6 ml-2 focus:outline-none hover:bg-red-400 rounded" (click)="agregarAlCarrito()">Agregar Al Carrito</button>
 
             <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
               <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">

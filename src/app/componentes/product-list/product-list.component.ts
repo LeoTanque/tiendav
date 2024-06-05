@@ -7,20 +7,20 @@ import { Subscription } from 'rxjs';
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
-}) 
+})
 export class ProductListComponent implements OnInit, OnDestroy{
-
+  productos:any[]=[];
   producto: Producto[]=[];
   productoSub: Subscription | undefined;
   constructor(private productoServicio: ProductoService){}
 
   ngOnInit(): void {
       this.productoSub = this.productoServicio.getProducto()
-      .subscribe ({
+      .subscribe ({ 
         next: (producto: Producto[]) => {
           this.producto = producto
-          console.log(this.producto)
-        },
+          console.log('lklk',this.producto)
+        }, 
         error: (err: any) => {
           console.error(err)
         },
@@ -28,7 +28,11 @@ export class ProductListComponent implements OnInit, OnDestroy{
           console.log('completado')
         }
       })
+
+      
   }
+
+  
 
   ngOnDestroy(): void {
     this.productoSub?.unsubscribe();

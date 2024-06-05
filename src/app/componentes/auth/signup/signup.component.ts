@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passwordsMatchValidator } from '../../../servicios/passwordsMatchValidator';
 import { AuthService, CredencialI } from '../../../servicios/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -56,16 +57,9 @@ export class SignupComponent implements OnInit {
     return this.signupForm.get('confirmPassword');
   }
 
-  onSubmit1() {
-    if (this.signupForm.valid) {
-      console.log(this.signupForm.value);
-     
-    }else{
-      console.log('invalid')
-    }
-  }
+ 
 
-  onSubmit() {
+  onSubmit1() {
     if (this.signupForm.valid) {
       const { email, password } = this.signupForm.value;
       const credencial: CredencialI = { email, password };
@@ -82,6 +76,108 @@ export class SignupComponent implements OnInit {
         });
     } else {
       console.log('Formulario inválido');
+    }
+  }
+
+  onSubmit() {
+    if (this.signupForm.valid) {
+      const { email, password } = this.signupForm.value;
+      const credencial: CredencialI = { email, password };
+
+      this.auth.signUpWithEmailAndpassword(credencial)
+        .then(userCredential => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Registro exitoso',
+            text: 'Usuario registrado exitosamente',
+          });
+          this.route.navigate(['/signin']);
+        })
+        .catch(error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error al registrar usuario: ' + error.message,
+          });
+        });
+    } else {
+      this.showValidationErrors();
+    }
+  }
+
+  showValidationErrors() {
+    if (this.fullName?.invalid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en el registro',
+        text: 'El nombre es obligatorio',
+      });
+    } else if (this.email?.invalid) {
+      this.showEmailErrors();
+    } else if (this.user?.invalid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en el registro',
+        text: 'El usuario es obligatorio',
+      });
+    } else if (this.password?.invalid) {
+      this.showPasswordErrors();
+    } else if (this.confirmPassword?.invalid || this.signupForm.errors?.['passwordsNotMatch']) {
+      this.showConfirmPasswordErrors();
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Formulario inválido',
+        text: 'Por favor, corrige los errores en el formulario',
+      });
+    }
+  }
+
+  showEmailErrors() {
+    if (this.email?.errors?.['required']) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en el registro',
+        text: 'El correo es obligatorio',
+      });
+    } else if (this.email?.errors?.['email']) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en el registro',
+        text: 'Correo no válido',
+      });
+    }
+  }
+
+  showPasswordErrors() {
+    if (this.password?.errors?.['required']) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en el registro',
+        text: 'La contraseña es obligatoria',
+      });
+    } else if (this.password?.errors?.['minlength']) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en el registro',
+        text: 'La contraseña debe tener al menos 6 caracteres',
+      });
+    }
+  }
+
+  showConfirmPasswordErrors() {
+    if (this.confirmPassword?.errors?.['required']) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en el registro',
+        text: 'Confirmar contraseña es obligatorio',
+      });
+    } else if (this.signupForm.errors?.['passwordsNotMatch']) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en el registro',
+        text: 'Las contraseñas no coinciden',
+      });
     }
   }
 

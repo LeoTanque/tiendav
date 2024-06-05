@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Producto } from '../modelos/producto';
 
-@Injectable({
+@Injectable({ 
   providedIn: 'root'
 })
 export class ProductoService {
-  private apiUrl: string = 'http://localhost/assets/data/productos.json';
+  private apiUrl: string = 'http://localhost:3000/productos';
 
   private carrito: Producto[] = [];
   private carritoSubject: BehaviorSubject<Producto[]> = new BehaviorSubject<Producto[]>([]);

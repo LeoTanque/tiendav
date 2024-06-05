@@ -29,7 +29,9 @@ import { CarritoComponent } from './componentes/carrito/carrito.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-
+import { ListaProductosComponent } from './componentes/lista-productos/lista-productos.component';
+//import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 register();
 
 @NgModule({
@@ -47,6 +49,7 @@ register();
     ProductoComponent,
     MetodoPagoComponent,
     CarritoComponent,
+    ListaProductosComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,15 +63,20 @@ register();
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+   // AngularFirestoreModule,
   ],
   providers: [
     provideAnimationsAsync(),
     provideFirebaseApp(() => initializeApp({"projectId":"tienda-auth-2b051","appId":"1:223222294121:web:a3d2cfb7f7488e35fd24f8","storageBucket":"tienda-auth-2b051.appspot.com","apiKey":"AIzaSyBPEj2XZyCMRYgUHioXgyQVDl_cVsht7qc","authDomain":"tienda-auth-2b051.firebaseapp.com","messagingSenderId":"223222294121"})),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage())
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
+
+
+
